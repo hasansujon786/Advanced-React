@@ -3,3 +3,15 @@ type User {
   name: String!
   emain: String!
 }
+
+type Item {
+  id: ID! @id
+  title     : String!
+  descriptio: String!
+  image     : String
+  largeImage: String
+  price     : Int!
+  createdAt : DateTime @createdAt
+  updatedAt : DateTime @updatedAt
+  # user: User!
+}
