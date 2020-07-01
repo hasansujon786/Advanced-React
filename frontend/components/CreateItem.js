@@ -18,9 +18,9 @@ const CreateItem = () => {
   const [state, setState] = useState({
     title: 'random title',
     description: 'random description',
+    price: 10000,
     image: '',
     largeImage: '',
-    price: 10000,
   })
 
   const handleChange = (e) => {
@@ -36,6 +36,29 @@ const CreateItem = () => {
     Router.push({
       pathname: '/item',
       query: {id: data.createItem.id}
+    })
+  }
+
+  const uploadImage = async e => {
+    const clApi = 'https://api.cloudinary.com/v1_1/hasansujon786/upload'
+    const files = e.target.files
+
+    const data = new FormData()
+    data.append('file', files[0])
+    data.append('upload_preset', 'sick-fits')
+
+    const res = await fetch(clApi, {
+      method: 'post',
+      body: data
+    })
+
+    // TODO - check if image upload is successful
+    const file = await res.json()
+    console.log(file)
+    setState({
+      ...state,
+      image: file.secure_url,
+      largeImage: file.eager[0].secure_url
     })
   }
 
@@ -62,24 +85,14 @@ const CreateItem = () => {
               <label htmlFor="image">
                 Image
                 <input
-                  onChange={handleChange}
-                  type='text'
+                  onChange={uploadImage}
+                  type='file'
                   name="image"
-                  placeholder="image"
+                  placeholder="Upload an image"
                   id="image"
-                  value={state.image}
                 />
-              </label>
-              <label htmlFor="largeImage">
-                Large Image
-                <input
-                  onChange={handleChange}
-                  type='text'
-                  name="largeImage"
-                  placeholder="largeImage"
-                  id="largeImage"
-                  value={state.largeImage}
-                />
+
+                {state.image && <img src={state.image} alt="Upload Preview" />}
               </label>
               <label htmlFor="price">
                 Price
