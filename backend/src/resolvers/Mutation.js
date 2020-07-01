@@ -10,6 +10,14 @@ const Mutation = {
 
     return item
   },
+  async updateItem(parent, {data, where}, ctx, info) {
+    const updatedItem = await ctx.db.mutation.updateItem({
+      data,
+      where
+    }, info)
+
+    return updatedItem
+  }
 
 };
 

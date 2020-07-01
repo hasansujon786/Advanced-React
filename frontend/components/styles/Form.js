@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components';
+import styled, {keyframes} from 'styled-components';
 
 const loading = keyframes`
   from {
@@ -28,8 +28,8 @@ const Form = styled.form`
   textarea,
   select {
     width: 100%;
-    padding: 0.5rem;
-    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    font-size: 1.6rem;
     border: 1px solid black;
     &:focus {
       outline: 0;
