@@ -15,7 +15,7 @@ scalar DateTime
 type Item {
   id: ID!
   title: String!
-  descriptio: String!
+  description: String!
   image: String
   largeImage: String
   price: Int!
@@ -32,7 +32,7 @@ type ItemConnection {
 input ItemCreateInput {
   id: ID
   title: String!
-  descriptio: String!
+  description: String!
   image: String
   largeImage: String
   price: Int!
@@ -48,8 +48,8 @@ enum ItemOrderByInput {
   id_DESC
   title_ASC
   title_DESC
-  descriptio_ASC
-  descriptio_DESC
+  description_ASC
+  description_DESC
   image_ASC
   image_DESC
   largeImage_ASC
@@ -65,7 +65,7 @@ enum ItemOrderByInput {
 type ItemPreviousValues {
   id: ID!
   title: String!
-  descriptio: String!
+  description: String!
   image: String
   largeImage: String
   price: Int!
@@ -93,7 +93,7 @@ input ItemSubscriptionWhereInput {
 
 input ItemUpdateInput {
   title: String
-  descriptio: String
+  description: String
   image: String
   largeImage: String
   price: Int
@@ -101,7 +101,7 @@ input ItemUpdateInput {
 
 input ItemUpdateManyMutationInput {
   title: String
-  descriptio: String
+  description: String
   image: String
   largeImage: String
   price: Int
@@ -136,20 +136,20 @@ input ItemWhereInput {
   title_not_starts_with: String
   title_ends_with: String
   title_not_ends_with: String
-  descriptio: String
-  descriptio_not: String
-  descriptio_in: [String!]
-  descriptio_not_in: [String!]
-  descriptio_lt: String
-  descriptio_lte: String
-  descriptio_gt: String
-  descriptio_gte: String
-  descriptio_contains: String
-  descriptio_not_contains: String
-  descriptio_starts_with: String
-  descriptio_not_starts_with: String
-  descriptio_ends_with: String
-  descriptio_not_ends_with: String
+  description: String
+  description_not: String
+  description_in: [String!]
+  description_not_in: [String!]
+  description_lt: String
+  description_lte: String
+  description_gt: String
+  description_gte: String
+  description_contains: String
+  description_not_contains: String
+  description_starts_with: String
+  description_not_starts_with: String
+  description_ends_with: String
+  description_not_ends_with: String
   image: String
   image_not: String
   image_in: [String!]
