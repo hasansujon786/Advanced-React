@@ -1,11 +1,10 @@
 import React, {useState} from 'react';
+import {Mutation} from 'react-apollo';
+import Router from 'next/router';
 import gql from 'graphql-tag'
 // file imports
 import From from './styles/Form'
-// import formatMoney from '../lib/formatMoney';
-import {Mutation} from 'react-apollo';
 import ErrorMessage from './ErrorMessage';
-import Router from 'next/router';
 
 const CREATE_ITEM_MUTATION = gql`
   mutation CREATE_ITEM_MUTATION ($data: ItemCreateInput!) {
@@ -14,7 +13,7 @@ const CREATE_ITEM_MUTATION = gql`
     }
   }
 `
-const CreateItem = () => {
+const ItemCreate = () => {
   const [state, setState] = useState({
     title: 'random title',
     description: 'random description',
@@ -32,7 +31,6 @@ const CreateItem = () => {
   const handleSubmit = async (e, createItem) => {
     e.preventDefault()
     const {data} = await createItem()
-    console.log(data);
     Router.push({
       pathname: '/item',
       query: {id: data.createItem.id}
@@ -125,4 +123,4 @@ const CreateItem = () => {
   );
 }
 
-export default CreateItem
+export default ItemCreate

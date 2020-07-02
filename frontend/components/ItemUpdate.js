@@ -25,7 +25,7 @@ const SINGLE_ITEM_QUERY = gql`
     }
   }
 `
-const UpdateItem = (props) => {
+const ItemUpdate = (props) => {
   const [state, setState] = useState({})
 
   const [updateItem, updateRes] = useMutation(UPDATE_ITEM_MUTATION);
@@ -100,4 +100,4 @@ const UpdateItem = (props) => {
   );
 }
 
-export default UpdateItem
+export default ItemUpdate

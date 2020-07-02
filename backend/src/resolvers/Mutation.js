@@ -17,6 +17,17 @@ const Mutation = {
     }, info)
 
     return updatedItem
+  },
+  async deleteItem(parent, {where}, {db}, info) {
+    // find the item
+    const item = await db.query.item({where}, `{
+      id
+      title
+    }`)
+    // TODO
+    // check if user own the item or has the permission
+    // delete image form cloudinary
+    return db.mutation.deleteItem({where}, info)
   }
 
 };

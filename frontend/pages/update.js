@@ -1,13 +1,13 @@
 import React from 'react';
-import UpdateItem from '../components/UpdateItem';
 import {useRouter} from 'next/router';
+import ItemUpdate from '../components/ItemUpdate';
 
 const Update = () => {
   const {query} = useRouter()
 
   return (
     <div>
-      <UpdateItem id={query.id} />
+      <ItemUpdate id={query.id} />
     </div>
   );
 }

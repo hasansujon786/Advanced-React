@@ -1,10 +1,10 @@
 import React from 'react';
-import CreateItem from '../components/CreateItem';
+import ItemCreate from '../components/ItemCreate';
 
 const Sell = () => {
   return (
     <div>
-      <CreateItem />
+      <ItemCreate />
     </div>
   );
 }

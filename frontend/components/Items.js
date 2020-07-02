@@ -5,7 +5,7 @@ import styled from 'styled-components'
 
 import Item from './Item';
 
-const ALL_ITEM_QUERY = gql`
+export const ALL_ITEMS_QUERY = gql`
   query ALL_ITEM_QUERY {
     items {
       id
@@ -32,7 +32,7 @@ const ItemList = styled.div`
 const Items = () => {
   return (
     <Center>
-      <Query query={ALL_ITEM_QUERY}>
+      <Query query={ALL_ITEMS_QUERY}>
         {({data, loading, error}) => {
           if (loading) return <p>Loading...</p>
           if (error) return <p>Erros: {error.message}</p>
