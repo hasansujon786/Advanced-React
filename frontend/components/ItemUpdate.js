@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
+import {useQuery, useMutation} from 'react-apollo';
 import gql from 'graphql-tag'
 // file imports
 import From from './styles/Form'
-import {useQuery, useMutation} from 'react-apollo';
 import ErrorMessage from './ErrorMessage';
 // import Router from 'next/router';
 
@@ -16,7 +16,7 @@ const UPDATE_ITEM_MUTATION = gql`
     }
   }
 `
-const SINGLE_ITEM_QUERY = gql`
+export const SINGLE_ITEM_QUERY = gql`
   query SINGLE_ITEM_QUERY ($where: ItemWhereUniqueInput!) {
     item(where: $where) {
       title

@@ -25,7 +25,11 @@ const ItemDelete = ({id}) => {
     deleteItem({variables: {where: {id}}})
   }
   return (
-    <button onClick={handleItemDelete}>Delet{loading ? 'ing...' : 'e'}</button>
+    <button
+      style={{cursor: 'pointer'}}
+      onClick={handleItemDelete}>
+      Delet{loading ? 'ing...' : 'e'}
+    </button>
   );
 }
 

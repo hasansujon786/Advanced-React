@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {Mutation} from 'react-apollo';
-import Router from 'next/router';
 import gql from 'graphql-tag'
 // file imports
 import From from './styles/Form'
@@ -31,10 +30,14 @@ const ItemCreate = () => {
   const handleSubmit = async (e, createItem) => {
     e.preventDefault()
     const {data} = await createItem()
-    Router.push({
-      pathname: '/item',
-      query: {id: data.createItem.id}
-    })
+    // TODO
+    // Show user a push notification to with a link to view
+    // currently created item.
+
+    // Router.push({
+    //   pathname: '/item',
+    //   query: {id: data.createItem.id}
+    // })
   }
 
   const uploadImage = async e => {
