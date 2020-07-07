@@ -31,6 +31,7 @@ const Mutation = {
     return ctx.db.mutation.deleteItem({where}, info)
   },
   async signUp(_, args, ctx, info) {
+    // hash the password
     const password = await bcrypt.hash(args.password, 10)
     const user = await ctx.db.mutation.createUser({
       data: {
@@ -40,8 +41,8 @@ const Mutation = {
       }
     }, info)
 
+    // set cookie
     const token = jwt.sign({userId: user.id}, APP_SECRET)
-
     ctx.response.cookie('token', token, {
       httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24 * 365 // 1yr

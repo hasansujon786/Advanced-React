@@ -1,10 +1,22 @@
-// let's go!
 import createServer from './createServer';
+import cookieParser from 'cookie-parser'
+import jwt from 'jsonwebtoken'
+
 import db from './db'
+import {APP_SECRET} from './config';
 const server = createServer()
 
-// TODO use express middleware to handle cookies
-// TODO use express middleware to populate current user
+// use express middleware to handle cookies
+server.express.use(cookieParser())
+server.express.use((req, _, next) => {
+  const {token} = req.cookies
+  if (token) {
+    // populate current userId form token
+    const {userId} = jwt.verify(token, APP_SECRET)
+    req.userId = userId
+  }
+  next()
+})
 
 server.start({
   cors: {
