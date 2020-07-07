@@ -5,19 +5,20 @@ import Form from './styles/Form'
 import ErrorMessage from './ErrorMessage'
 import {CURRENT_USER_QUERY} from '../hooks/useUser'
 
-const SIGNUP_MUTATION = gql`
-  mutation SIGNUP_MUTATION ($name: String!, $email: String!, $password: String!) {
-    signUp(name: $name, email: $email, password: $password) {
+const SIGNIN_MUTATION = gql`
+  mutation SIGNIN_MUTATION ($email: String!, $password: String!) {
+    signIn( email: $email, password: $password) {
       id
       name
       email
+      permissions
+      password
     }
   }
 `
 
-function SignUp() {
+function SignIn() {
   const [formState, setFormState] = useState({
-    name: '',
     email: '',
     password: ''
   })
@@ -29,7 +30,7 @@ function SignUp() {
     })
   }
 
-  const [signUpAnUser, {error, loading}] = useMutation(SIGNUP_MUTATION, {
+  const [signInAnUser, {error, loading}] = useMutation(SIGNIN_MUTATION, {
     refetchQueries: [
       {query: CURRENT_USER_QUERY}
     ]
@@ -38,31 +39,19 @@ function SignUp() {
   return (
     <Form method='post' onSubmit={async e => {
       e.preventDefault()
-      const {data} = await signUpAnUser({variables: {...formState}})
+      const {data} = await signInAnUser({variables: {...formState}})
       if (data) {
-        console.log('signUp succesful');
+        console.log('signIn succesful');
       }
     }}>
       <fieldset disabled={loading} aria-busy={loading}>
-        <h2>Signup for an account</h2>
+        <h2>Sign into your account</h2>
         <ErrorMessage error={error} />
-        <label htmlFor="name">
-          Name
-        <input
-            type="text"
-            id='name'
-            name='name'
-            placeholder='name'
-            required
-            value={formState.name}
-            onChange={handleInputChange}
-          />
-        </label>
-        <label htmlFor="email">
+        <label htmlFor="signin-email">
           email
         <input
             type="email"
-            id='email'
+            id='signin-email'
             name='email'
             placeholder='email'
             required
@@ -70,22 +59,22 @@ function SignUp() {
             onChange={handleInputChange}
           />
         </label>
-        <label htmlFor="password">
+        <label htmlFor="signin-password">
           password
         <input
             type="password"
-            id='password'
+            id='signin-password'
             name='password'
             placeholder='password'
-            required
             value={formState.password}
             onChange={handleInputChange}
           />
         </label>
-        <button type='submit'>Signup</button>
+        <button type='submit'>Signin</button>
       </fieldset>
     </Form>
   )
 }
 
-export default SignUp
+export default SignIn
+

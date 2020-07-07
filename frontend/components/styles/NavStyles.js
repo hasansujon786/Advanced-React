@@ -12,10 +12,12 @@ const NavStyles = styled.ul`
     display: flex;
     align-items: center;
     position: relative;
+    color: ${props => props.theme.black};
     text-transform: uppercase;
     font-weight: 900;
     font-size: 1em;
     background: none;
+    font-family: inherit;
     border: 0;
     cursor: pointer;
     @media (max-width: 700px) {

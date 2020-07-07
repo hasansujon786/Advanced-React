@@ -4,7 +4,8 @@ type Mutation {
   updateItem(data: ItemUpdateInput!, where: ItemWhereUniqueInput!): Item
   deleteItem(where: ItemWhereUniqueInput!): Item
   signUp(name: String!  email: String! password: String!): User
-
+  signIn(email: String! password: String!): User
+  signOut: Boolean
 }
 
 type Query {

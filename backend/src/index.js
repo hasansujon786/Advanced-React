@@ -2,7 +2,7 @@ import createServer from './createServer';
 import cookieParser from 'cookie-parser'
 import jwt from 'jsonwebtoken'
 
-import db from './db'
+// import db from './db'
 import {APP_SECRET} from './config';
 const server = createServer()
 

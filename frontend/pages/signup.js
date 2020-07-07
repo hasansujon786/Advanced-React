@@ -1,5 +1,6 @@
 import React from 'react'
 import SignUp from '../components/SignUp'
+import SignIn from '../components/SingIn'
 import styled from 'styled-components'
 
 const Column = styled.div`
@@ -11,6 +12,7 @@ const Column = styled.div`
 const SignUpPage = () => {
   return (
     <Column>
+      <SignIn />
       <SignUp />
     </Column>
   )
