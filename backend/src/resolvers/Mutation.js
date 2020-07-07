@@ -1,5 +1,9 @@
+import bcrypt from 'bcryptjs'
+import jwt from 'jsonwebtoken'
+import {APP_SECRET} from '../config';
+
 const Mutation = {
-  async createItem(parent, args, ctx, info) {
+  async createItem(_, args, ctx, info) {
     // TODO: check if the are logged in
 
     const item = await ctx.db.mutation.createItem({
@@ -10,7 +14,7 @@ const Mutation = {
 
     return item
   },
-  async updateItem(parent, {data, where}, ctx, info) {
+  async updateItem(_, {data, where}, ctx, info) {
     const updatedItem = await ctx.db.mutation.updateItem({
       data,
       where
@@ -18,16 +22,32 @@ const Mutation = {
 
     return updatedItem
   },
-  async deleteItem(parent, {where}, {db}, info) {
+  async deleteItem(_, {where}, ctx, info) {
     // find the item
-    const item = await db.query.item({where}, `{
-      id
-      title
-    }`)
+    const item = await ctx.db.query.item({where}, `{ id }`)
     // TODO
     // check if user own the item or has the permission
     // delete image form cloudinary
-    return db.mutation.deleteItem({where}, info)
+    return ctx.db.mutation.deleteItem({where}, info)
+  },
+  async signUp(_, args, ctx, info) {
+    const password = await bcrypt.hash(args.password, 10)
+    const user = await ctx.db.mutation.createUser({
+      data: {
+        ...args,
+        password,
+        permissions: {set: ['USER']}
+      }
+    }, info)
+
+    const token = jwt.sign({userId: user.id}, APP_SECRET)
+
+    ctx.response.cookie('token', token, {
+      httpOnly: true,
+      maxAge: 1000 * 60 * 60 * 24 * 365 // 1yr
+    })
+
+    return user
   }
 
 };
