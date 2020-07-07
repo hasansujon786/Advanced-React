@@ -6,7 +6,7 @@ import {CURRENT_USER_QUERY} from '../hooks/useUser'
 const SIGNOUT_MUTATION = gql`
   mutation SIGNOUT_MUTATION {
     signOut
-C }
+  }
 `
 const SignOut = () => {
   const [signOutUser] = useMutation(SIGNOUT_MUTATION, {
